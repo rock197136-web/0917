@@ -1,0 +1,316 @@
+/* Gaming visual layer: scoped effects preserve tournament layout and controls. */
+:root{--bg:#070707;--panel:#121212;--panel-2:#1c1b19;--border:#40372b;--text:#fff6e9;--muted:#b7ada0;--cyan:#ff9f24;--cyan-soft:#ffda91;--teal:#ffd34d;--violet:#ffc23d;--hdr-blue:#ff9f24;--hdr-blue-soft:#ffda91;--hdr-red:#ffc23d;--side-a:#ff9f24;--side-b:#ffd34d;--gaming-glow:255,159,36;}
+body{isolation:isolate;background:radial-gradient(ellipse at 0 0,#5532074d,transparent 55%),radial-gradient(ellipse at 100% 65%,#73471924,transparent 55%),var(--bg);}
+body::before{content:'';position:fixed;inset:-64px;z-index:-1;pointer-events:none;background-image:linear-gradient(#ff9f2409 1px,transparent 1px),linear-gradient(90deg,#ff9f2409 1px,transparent 1px);background-size:64px 64px;animation:gamingGridDrift 32s linear infinite;}
+@keyframes gamingGridDrift{to{transform:translate3d(64px,64px,0);}}
+.header{background:radial-gradient(ellipse at 20% 0,#ff9f2413,transparent 65%),linear-gradient(120deg,#1b1711,#0b0b0b 65%,#241b0d);border-bottom:1px solid #ff9f2445;}
+.header .sys-tag{color:#ffda91;}
+.header .sys-dot,.header .status-dot{background:#ff9f24;box-shadow:0 0 10px #ff9f2480;}
+.header .logo-x{color:#ffd34d;text-shadow:0 0 16px #ffc23d55;}
+.header .identity-name{color:#fff6e9;text-shadow:0 0 24px #ff9f2422;}
+.header .identity-kicker{color:#c6ad84;}
+.header .identity-frame-main{stroke:#ff9f24;}
+.header .identity-frame-echo{stroke:#675134;}
+.header .identity-frame-detail{stroke:#ffd34d;}
+.header .identity-frame-flow{stroke:#fff0bd;filter:drop-shadow(0 0 4px #ff9f2499);}
+.header .identity-copy{background:radial-gradient(ellipse,#10100f 30%,#10100fe0 58%,transparent 78%);}
+.header-release-row .version-info{color:#b7ada0;}.version-announcement{color:#ff9f24;}
+.card{background:linear-gradient(130deg,#201c16,#111110 65%);border:1px solid #4b3c27;border-radius:4px 16px 4px 16px;box-shadow:inset 0 1px #ffffff06,0 8px 30px #00000024;transition:border-color .22s ease,box-shadow .22s ease;}
+.card-title{color:#fff6e9;}.card-sub,.field-label{color:#b7ada0;}
+.tabs{padding-top:4px;padding-bottom:7px;}
+.tabs .tab{background:#121212;border-color:#493b28;border-radius:3px 10px 3px 10px;color:#c5b8a5;}
+.tabs .tab.active{color:#ffe0a2;background:linear-gradient(120deg,#4c3213,#251e14);border-color:#ff9f2499;box-shadow:inset 0 -2px #ff9f24,0 0 14px #ff9f2415;}
+.btn,.tab,.icon-btn,.attendance-toggle{transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease,background .18s ease,filter .18s ease;}
+.btn{border-radius:3px 10px 3px 10px;}
+.btn-primary,.match .btn-primary{background:linear-gradient(115deg,#ff9f24,#ffd34d);color:#1a1003;border:1px solid #ffe5a6;box-shadow:0 3px 0 #94520b,0 0 18px #ff9f2418;}
+.btn-dark,.btn-ghost{background:#201c16;color:#eee0ca;border-color:#57432b;}
+.btn-danger{--gaming-glow:255,100,90;background:#341827;color:#ffc2d8;border-color:#93415f;}
+.btn-success{--gaming-glow:91,236,176;background:#12382e;color:#b2f6d7;border:1px solid #397c65;}
+.btn-warning{--gaming-glow:233,187,104;}
+.match .btn-ghost{color:#ffda91;border-color:#ff9f2455;}
+.text-input,select.text-input,.chip-input-wrap{background:#0c0c0b;border-color:#51422e;color:#fff6e9;}
+.text-input:focus,.chip-input-wrap:focus-within{outline:2px solid #ff9f24;outline-offset:2px;box-shadow:0 0 14px #ff9f2418;}
+button:focus-visible,summary:focus-visible{outline:2px solid #ffdc8d;outline-offset:3px;}
+.attendance-toggle{background:linear-gradient(110deg,#3e2a12,#17140f 75%);border-color:#ff9f2466;box-shadow:inset 3px 0 #ff9f24;}
+.attendance-toggle-icon{background:#ff9f2412;color:#ffdc8d;border-color:#ff9f2455;}
+.attendance-toggle-note{color:#c6b9a7;}
+.stats-bar{background:#121212;border-color:#4b3c27;border-radius:4px 14px 4px 14px;}.stats-bar .sb-progress-fill{background:linear-gradient(90deg,#ff9f24,#ffd34d);}
+.match{background:linear-gradient(120deg,#211b13,#111110);border-color:#4b3c27;transition:border-color .2s ease,box-shadow .2s ease;}
+.match.completed{border-color:#ff9f2444;border-left-color:#ff9f24;}
+.status-pill.done{background:#ff9f2415;color:#ffda91;}
+.match-filter-btn.active{background:#ff9f24;color:#1a1003;}
+@media(hover:hover) and (pointer:fine){
+ .btn:not(:disabled):hover,.tabs .tab:hover,.icon-btn:not(:disabled):hover{transform:translateY(-2px) scale(1.015);border-color:rgb(var(--gaming-glow));box-shadow:0 0 0 1px rgba(var(--gaming-glow),.18),0 0 22px rgba(var(--gaming-glow),.26);filter:brightness(1.08);}
+ .card:hover,.match:hover{border-color:#ff9f2488;box-shadow:inset 0 1px #ff9f2415,0 0 24px #ff9f2412;transform:none;}
+ .attendance-toggle:hover{border-color:#ffe3a0;box-shadow:inset 3px 0 #ff9f24,0 0 20px #ff9f2422;}
+}
+.btn:not(:disabled):active,.tabs .tab:active,.icon-btn:not(:disabled):active{transform:scale(.985);filter:brightness(1.12);}
+@media(hover:none){.match:hover{transform:none;}.btn,.tab,.icon-btn{touch-action:manipulation;}}
+@media(max-width:700px){
+ .header .identity-card{background:linear-gradient(120deg,#ff9f2408,#ffc23d06),#121212;border-color:#ff9f2450;border-radius:3px 14px 3px 14px;}
+ .header .identity-card::before{background:linear-gradient(#ff9f24,#ff9f24) left top/20px 1px no-repeat,linear-gradient(#ff9f24,#ff9f24) left top/1px 10px no-repeat,linear-gradient(#ffd34d,#ffd34d) right bottom/20px 1px no-repeat,linear-gradient(#ffd34d,#ffd34d) right bottom/1px 10px no-repeat;}
+ .header .identity-card::after{background:linear-gradient(90deg,transparent,#ff9f24,#ffd34d,transparent);}
+ .header .identity-copy{background:none;}.card{padding:16px;}
+ .referee-view .header .identity-card{background:none;border:0;}
+}
+@media(prefers-reduced-motion:reduce){
+ body::before{animation:none;}.btn,.tab,.icon-btn,.attendance-toggle,.card,.match{transition:none;}
+ .btn:not(:disabled):hover,.tabs .tab:hover,.icon-btn:not(:disabled):hover,.btn:not(:disabled):active,.tabs .tab:active{transform:none;}
+}
+/* ===== 賽程狀態：最後優先規則 =====
+   進行中僅使用紅色外框；不繼承賽事主題的橘黃外框或光暈。 */
+.bracket-match.is-live,
+.bracket-match.final-match.is-live,
+.bracket-bronze-body .bracket-match.is-live{
+  border:2px solid #ff2f3d !important;
+  outline:0 !important;
+  box-shadow:none !important;
+  filter:none !important;
+  animation:none !important;
+}
+/* 即將上場改成單一 2px 亮黃框；以框色呼吸提升辨識，不建立第二層外框。 */
+.bracket-match.is-next,
+.bracket-match.final-match.is-next{
+  border:2px solid #ffc128 !important;
+  outline:0 !important;
+  box-shadow:none !important;
+  filter:none !important;
+  animation:nextMatchBorder 1.7s ease-in-out infinite !important;
+}
+.bracket-match.is-next::before{
+  content:none !important;
+}
+.bracket-status-badge.next{
+  padding:5px 13px 6px;
+  color:#fff4c7;
+  border:2px solid #ffc128;
+  border-bottom:0;
+  background:linear-gradient(180deg,#4a3107,#261b08);
+  box-shadow:0 -3px 12px rgba(255,193,40,.2);
+}
+.bracket-status-badge.next .bracket-status-dot{
+  width:7px;
+  height:7px;
+  background:#ffd34d;
+  box-shadow:0 0 8px #ffd34d;
+}
+/* 進行中／即將上場固定於對戰框右上角，避開左側場次與選手姓名。 */
+.bracket-match .bracket-status-badge,
+.bracket-match.final-match .bracket-status-badge.with-final{
+  top:0 !important;
+  right:10px !important;
+  bottom:auto !important;
+  left:auto !important;
+  min-height:31px;
+  border-radius:10px 10px 0 0;
+  transform:translateY(-100%) !important;
+}
+.bracket-match .bracket-status-badge.live{
+  padding:5px 13px 6px;
+  color:#ff8b91;
+  border:2px solid #ff2f3d;
+  border-bottom:0;
+  background:linear-gradient(180deg,#3b1015,#210b0e);
+  box-shadow:0 -3px 12px rgba(255,47,61,.2);
+}
+.bracket-match .bracket-status-badge::after{
+  content:none;
+}
+/* 狀態文字簡化：右上方顯示發光圓點與文字，不使用標籤框或底色。 */
+.bracket-match .bracket-status-badge.live,
+.bracket-match.final-match .bracket-status-badge.live.with-final,
+.bracket-match .bracket-status-badge.next,
+.bracket-match.final-match .bracket-status-badge.next.with-final{
+  top:0 !important;
+  right:8px !important;
+  min-height:0;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+  transform:translateY(calc(-100% - 8px)) !important;
+  color:#ff5863;
+  font-size:12px;
+  line-height:1;
+  letter-spacing:.08em;
+  text-shadow:0 0 8px rgba(255,47,61,.32);
+}
+.bracket-match .bracket-status-badge.next,
+.bracket-match.final-match .bracket-status-badge.next.with-final{
+  color:#ffd34d;
+  text-shadow:0 0 8px rgba(255,193,40,.34);
+}
+.bracket-status-badge.live .bracket-status-dot{
+  display:block;
+}
+.bracket-status-badge.next .bracket-status-dot{
+  display:block;
+}
+@keyframes nextMatchBorder{
+  0%,100%{border-color:#e99d10;}
+  50%{border-color:#ffe36a;}
+}
+@media(prefers-reduced-motion:reduce){
+  .bracket-match.is-next,
+  .bracket-match.final-match.is-next{animation:none !important;}
+}
+
+/* 已完成場次與其晉級線使用同一個主題色：讓勝者所在的對戰框也被點亮。
+   狀態框（進行中／即將上場）與決賽金框仍由下方更具體的規則優先。 */
+.bracket-match.done:not(.final-match){
+  border-color:rgb(var(--theme-rgb));
+  box-shadow:
+    0 0 0 1px rgba(var(--theme-rgb),.20),
+    0 0 12px rgba(var(--theme-rgb),.28),
+    inset 0 0 12px rgba(var(--theme-rgb),.045);
+}
+/* 季軍戰保留原有青銅識別，不被一般晉級色覆蓋。 */
+.bracket-bronze-body .bracket-match.done{
+  border-color:var(--bronze);
+  box-shadow:
+    0 0 0 1px rgba(211,138,82,.18),
+    0 0 14px rgba(211,138,82,.26);
+}
+@media(prefers-reduced-motion:reduce){
+  .bracket-match.done:not(.final-match){ transition:none; }
+}
+
+/* ===== V3.9：現場操作性、資訊層級與視覺降噪 ===== */
+.bracket-title-row{position:relative;align-items:flex-start;gap:16px;}
+#bracketSection{overflow:visible;}
+.bracket-title-row>div:first-child{min-width:0;}
+.bracket-legend{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:9px;color:#aaa69f;font-size:12px;line-height:1.4;}
+.bracket-legend span{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;}
+.legend-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#777;}
+.legend-dot.live{background:#ff4652;box-shadow:0 0 7px rgba(255,47,61,.55);}
+.legend-dot.next{background:#ffd34d;box-shadow:0 0 7px rgba(255,193,40,.5);}
+.legend-dot.advanced{background:rgb(var(--theme-rgb));box-shadow:0 0 7px rgba(var(--theme-rgb),.5);}
+.bracket-more{position:relative;flex-shrink:0;z-index:50;}
+.bracket-more>summary{list-style:none;}
+.bracket-more>summary::-webkit-details-marker{display:none;}
+.bracket-more-btn,.bracket-current-btn{
+  min-height:44px;padding:0 14px;border:1px solid #51422e;border-radius:9px;
+  background:#181613;color:#e8ddca;font-size:13px;font-weight:800;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap;
+}
+.bracket-more[open] .bracket-more-btn,.bracket-more-btn:active,.bracket-current-btn:active{border-color:#ff9f24;color:#ffda91;background:#251b10;}
+.bracket-more-menu{
+  position:absolute;top:calc(100% + 8px);right:0;width:min(310px,calc(100vw - 48px));
+  padding:14px;border:1px solid #5b472d;border-radius:12px;background:#121212;
+  box-shadow:0 16px 40px rgba(0,0,0,.55);z-index:70;
+}
+.bracket-more-menu .bracket-theme-row{display:grid;grid-template-columns:auto 1fr;gap:8px 10px;margin:0 0 12px;}
+.bracket-more-menu .bracket-theme-row.hidden{display:none;}
+.bracket-more-menu .theme-swatch{grid-row:1;align-self:center;}
+.bracket-more-menu .field-label{grid-row:1;margin:0;align-self:center;font-size:12px;}
+.bracket-more-menu .theme-dropdown{grid-column:1/-1;max-width:none;width:100%;}
+.bracket-more-menu #shuffleScheduleBtn{width:100%;min-height:46px;margin:2px 0 0;font-size:14px;}
+.bracket-danger-note{margin:8px 2px 0;color:#a89b88;font-size:12px;line-height:1.5;}
+.viewer-mode .bracket-danger-note{display:none;}
+.bracket-header-actions{justify-content:stretch;margin-top:14px;}
+.bracket-header-actions>.bracket-search-wrap{width:100%;max-width:none;}
+.match-record-actions .bracket-search-wrap{
+  width:auto; min-width:220px; max-width:420px; flex:1 1 320px;
+}
+@media(max-width:640px){
+  .match-record-actions .bracket-search-wrap{width:100%;min-width:0;max-width:none;flex:1 1 100%;}
+}
+.bracket-search-box{min-height:46px;padding:10px 12px;}
+.bracket-search-input{font-size:14px;}
+.bracket-search-clear{width:40px;height:40px;padding:0;display:grid;place-items:center;}
+.bracket-zoom-toolbar{gap:8px;margin:12px 0 8px;}
+.bracket-zoom-btn{width:44px;height:44px;font-size:20px;}
+.bracket-zoom-reset,.bracket-current-btn{height:44px;min-height:44px;padding:0 14px;font-size:13px;}
+.bracket-zoom-hint{font-size:12px;line-height:1.5;flex:1 1 220px;}
+
+/* 非必要卡片不發光；亮色集中在目前場次、晉級、滿分與主要完成回饋。 */
+body::before{opacity:.42;}
+.card{background:#15130f;box-shadow:none;}
+@media(hover:hover) and (pointer:fine){
+  .card:hover,.match:hover{box-shadow:none;filter:none;}
+}
+
+/* 計分防誤觸：每場獨立鎖定 360ms，回饋僅使用小型數字提示。 */
+.score-console{position:relative;}
+.score-tap-feedback{
+  position:absolute;top:48px;z-index:8;min-width:48px;padding:5px 10px;border-radius:999px;
+  background:#211a10;border:1px solid #e9bb6870;color:#f5ce7b;text-align:center;
+  font:800 16px/1 'Space Mono',monospace;box-shadow:0 5px 18px rgba(0,0,0,.32);
+  pointer-events:none;animation:scoreFeedbackIn .16s ease-out both;
+}
+.score-tap-feedback.side-a{left:23%;transform:translateX(-50%);}
+.score-tap-feedback.side-b{right:23%;transform:translateX(50%);}
+.score-tap-feedback.is-leaving{opacity:0;transition:opacity .14s ease;}
+@keyframes scoreFeedbackIn{from{opacity:0;translate:0 4px}to{opacity:1;translate:0 0}}
+
+/* 粗略指標不應以縮小字體換取密度；主控模式改為隱藏次要英文。 */
+.master-mode .finish-sub{display:none!important;}
+.master-mode .ref-footer .btn{font-size:13px!important;min-height:44px;}
+.tab-label-mobile{display:none;}
+.tab-label{white-space:nowrap;}
+
+@media(any-pointer:coarse){
+  button,.icon-btn,summary[role="button"]{min-height:44px;}
+  .btn,.cloud-status-btn,.draw-text-btn,.draw-copy-btn,.bracket-more-btn,.bracket-current-btn{font-size:14px;}
+  .tabs .tab{font-size:12px;}
+  .bracket-zoom-btn,.bracket-zoom-reset,.bracket-current-btn,.match-filter-btn,
+  .draw-copy-btn,.cloud-share-btn,.attendance-action,.attendance-next-pending,.chip-remove{min-height:44px;}
+  /* 主控模式的裁判面板頭部按鈕平常只有 24px 寬，min-height:44px 只補了高度；
+     觸控裝置上寬度太窄仍容易誤觸，這裡補上最小寬度，讓熱區接近 44×44。 */
+  .master-mode .referee-panel > .ref-panel-head .icon-btn{min-width:40px;}
+  .attendance-action,.attendance-next-pending,.draw-copy-btn,.cloud-share-btn{font-size:13px!important;}
+  .bracket-zoom-btn{width:48px;height:48px;}
+  .bracket-zoom-reset,.bracket-current-btn{height:48px;}
+  .match-filter-btn{font-size:14px;}
+  .header .sys-tag,.header .identity-kicker,.version-info,.card-sub,.field-label,
+  .bracket-zoom-hint,.status-pill,.draw-hint,.cloud-code-tag,.attendance-toggle-kicker{font-size:12px!important;}
+  .score-console .finish-label,.master-mode .score-console .finish-label{font-size:14px!important;}
+  .score-console .finish-sub{font-size:12px!important;}
+  .score-console .next-match-kicker,.quick-console .quick-vs-mark,.master-mode .quick-console .quick-vs-mark{font-size:12px!important;}
+  .score-console .finish-btn,.master-mode .score-console .finish-btn{min-height:56px;}
+  .score-console .ref-footer>.btn{min-height:48px;font-size:14px;}
+  .match-winner-label{min-height:22px;font-size:12px;}
+}
+@media(max-width:560px){
+  .bracket-title-row{align-items:flex-start;}
+  .bracket-more-btn{min-width:78px;padding-inline:10px;}
+  .bracket-legend{gap:9px 12px;}
+  .bracket-zoom-toolbar{display:grid;grid-template-columns:48px auto 48px 1fr;}
+  .bracket-zoom-label{min-width:46px;}
+  .bracket-zoom-reset{grid-column:1/3;width:100%;}
+  .bracket-current-btn{grid-column:3/5;width:100%;}
+  .bracket-zoom-hint{grid-column:1/-1;}
+  .score-tap-feedback{top:42px;}
+}
+@media(max-width:700px){
+  .tab-label-desktop{display:none;}
+  .tab-label-mobile{display:inline;}
+  .tabs .tab{font-size:10.5px;}
+  .score-console .btn-reset-match,
+  .master-mode .score-console .btn-reset-match{
+    position:absolute;
+    top:11px;
+    left:11px;
+    z-index:7;
+    order:initial!important;
+    flex:none!important;
+    width:auto!important;
+    min-width:0!important;
+    min-height:32px!important;
+    padding:5px 7px!important;
+    border:0!important;
+    background:transparent!important;
+    color:#c99e9e!important;
+    box-shadow:none!important;
+    font-size:11px!important;
+    line-height:1!important;
+    white-space:nowrap!important;
+  }
+  .score-console .btn-reset-match:disabled{opacity:.35;}
+}
+@media(prefers-reduced-motion:reduce){
+  .score-tap-feedback{animation:none;}
+}
+@media print{body::before{display:none;}}
+
